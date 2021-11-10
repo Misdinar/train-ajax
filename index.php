@@ -13,6 +13,7 @@
     />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- script untuk mengambil teks di text.html -->
     <script>
       var XMLHttpRequestObject = false;
       if (window.XMLHttpRequest) {
@@ -40,8 +41,9 @@
         }
       }
     </script>
+
     <!-- script untuk ambil data daerah -->
-    <script>
+    <script type="text/javascript">
       $(document).ready(function () {
         $.ajax({
           type: "POST",
@@ -96,7 +98,7 @@
       <div class="container-fluid">
         <a
           class="navbar-brand fw-bold"
-          style="color: #2fdfff !important"
+          style="color: #c85c5c !important"
           href="#"
           >Train - AJAX</a
         >
@@ -183,7 +185,7 @@
       class="
         d-flex
         flex-column
-        bg-dark
+        bg-primary
         text-white
         align-items-center
         text-center
