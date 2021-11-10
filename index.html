@@ -41,9 +41,43 @@
         }
       }
     </script>
-
+    <script>
+      function loadProvinsi() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          const myObj = JSON.parse(this.responseText);
+          let html = "<option>Pilih Provinsi</option>";
+          let idx = 0;
+          for (let x of Object.keys(myObj)) {
+            html += "<option";
+            html += ` value='${idx}'>`;
+            html += x;
+            html += "</option>";
+            idx += 1;
+          }
+          document.getElementById("provinsi").innerHTML = html;
+        };
+        xhttp.open("GET", "kalimantan.json", true);
+        xhttp.send();
+      }
+      function loadKabKota(idx) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+          const myObj = JSON.parse(this.responseText);
+          let html = "<option>Pilih Kabupaten/Kota</option>";
+          for (let x of Object.values(myObj)[idx]) {
+            html += "<option>";
+            html += x;
+            html += "</option>";
+          }
+          document.getElementById("kabupaten").innerHTML = html;
+        };
+        xhttp.open("GET", "kalimantan.json", true);
+        xhttp.send();
+      }
+    </script>
     <!-- script untuk ambil data daerah -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       $(document).ready(function () {
         $.ajax({
           type: "POST",
@@ -90,9 +124,9 @@
           });
         });
       });
-    </script>
+    </script> -->
   </head>
-  <body>
+  <body onload="loadProvinsi()">
     <!-- Begin nav -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
@@ -150,7 +184,12 @@
               <div class="col">
                 <div class="form-group mb-2">
                   <label>Provinsi</label>
-                  <select class="form-select" name="provinsi" id="provinsi">
+                  <select
+                    class="form-select"
+                    name="provinsi"
+                    id="provinsi"
+                    onchange="loadKabKota(document.getElementById('provinsi').value)"
+                  >
                     <option value="">Pilih Provinsi</option>
                   </select>
                 </div>
@@ -160,7 +199,7 @@
                     <option value=""></option>
                   </select>
                 </div>
-                <div class="form-group mb-2">
+                <!-- <div class="form-group mb-2">
                   <label>Kecamatan</label>
                   <select class="form-select" name="kecamatan" id="kecamatan">
                     <option value=""></option>
@@ -171,7 +210,7 @@
                   <select class="form-select" name="kelurahan" id="kelurahan">
                     <option value=""></option>
                   </select>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
